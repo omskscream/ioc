@@ -1,2 +1,2 @@
 # ioc
-Simple IoC-container for Java language
+Simple Inversion of Control container for Java language.
