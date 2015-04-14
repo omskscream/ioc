@@ -11,45 +11,50 @@ import static org.junit.Assert.assertNotEquals;
  * @author omskscream
  */
 public class IOCKeyTest {
-    private final IOCKey k1 = IOCKey.of(Typed.STRING);
-    private final IOCKey k2 = IOCKey.of(Typed.STRING);
-    private final IOCKey k3 = IOCKey.of("name", Typed.STRING);
+    private final IOCKey stringKey = IOCKey.of(Typed.STRING);
+    private final IOCKey stringKey1 = IOCKey.of(Typed.STRING);
+    private final IOCKey namedStringKey = IOCKey.of("name", Typed.STRING);
 
-    private final IOCKey k4 = IOCKey.of(Typed.INTEGER);
-    private final IOCKey k5 = IOCKey.of("name", Typed.INTEGER);
+    private final IOCKey integerKey = IOCKey.of(Typed.INTEGER);
+    private final IOCKey namedIntegerKey = IOCKey.of("name", Typed.INTEGER);
 
-    private final IOCKey k6 = IOCKey.of(new Typed<List<String>>(){});
-    private final IOCKey k7 = IOCKey.of(new Typed<List<Integer>>(){});
+    private final IOCKey listStringKey = IOCKey.of(new Typed<List<String>>(){});
+    private final IOCKey listIntegerKey = IOCKey.of(new Typed<List<Integer>>(){});
 
     @Test
     public void equality() {
-        assertEquals(k1, k2);       // keys with same Typed are equal
-        assertEquals(k2, k1);       // symmetrically
+        assertEquals(stringKey, stringKey1);            // keys with same Typed are equal
+        assertEquals(stringKey1, stringKey);            // symmetrically
 
-        assertNotEquals(k1, k3);    // but with different names they are not
-        assertNotEquals(k1, k4);    // or with different Typed
-        assertNotEquals(k1, k5);
-        assertNotEquals(k1, k6);
-        assertNotEquals(k4, k5);
-        assertNotEquals(k5, k6);
-        assertNotEquals(k6, k7);
-        assertNotEquals(k3, k4);
-        assertNotEquals(k3, k6);
-        assertNotEquals(k3, k5);    // or with same name and different Typed
+        assertNotEquals(stringKey, namedStringKey);     // but with different names they are not
+        assertNotEquals(stringKey, integerKey);         // or with different Typed
+        assertNotEquals(stringKey, namedIntegerKey);
+        assertNotEquals(stringKey, listStringKey);
+        assertNotEquals(integerKey, namedIntegerKey);
+        assertNotEquals(namedIntegerKey, listStringKey);
+        assertNotEquals(listStringKey, listIntegerKey);
+        assertNotEquals(namedStringKey, integerKey);
+        assertNotEquals(namedStringKey, listStringKey);
+        assertNotEquals(namedStringKey, namedIntegerKey);// or with same name and different Typed
 
     }
 
     @Test
     public void hashes() {
-        assertEquals(k1.hashCode(), k2.hashCode());
-        assertNotEquals(k6.hashCode(), k7.hashCode());
+        // if keys are equal, their hashes must be equal too
+        // if keys are not equal, their hashes must be different (to avoid collisions in container)
 
-        assertNotEquals(k1.hashCode(), k3.hashCode());
-        assertNotEquals(k1.hashCode(), k4.hashCode());
+        assertEquals(stringKey.hashCode(), stringKey1.hashCode());
 
-        assertNotEquals(k4.hashCode(), k5.hashCode());
-        assertNotEquals(k5.hashCode(), k6.hashCode());
-        assertNotEquals(k1.hashCode(), k6.hashCode());
-        assertNotEquals(k3.hashCode(), k6.hashCode());
+        assertNotEquals(stringKey.hashCode(), namedStringKey.hashCode());
+        assertNotEquals(stringKey.hashCode(), integerKey.hashCode());
+        assertNotEquals(stringKey.hashCode(), namedIntegerKey.hashCode());
+        assertNotEquals(stringKey.hashCode(), listStringKey.hashCode());
+        assertNotEquals(namedStringKey.hashCode(), integerKey.hashCode());
+        assertNotEquals(namedStringKey.hashCode(), namedIntegerKey.hashCode());
+        assertNotEquals(namedStringKey.hashCode(), listStringKey.hashCode());
+        assertNotEquals(integerKey.hashCode(), namedIntegerKey.hashCode());
+        assertNotEquals(namedIntegerKey.hashCode(), listStringKey.hashCode());
+        assertNotEquals(listStringKey.hashCode(), listIntegerKey.hashCode());
     }
 }
