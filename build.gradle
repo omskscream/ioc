@@ -1,6 +1,16 @@
-apply plugin: 'java'
+plugins {
+    id 'java'
+    id 'me.champeau.gradle.jmh' version '0.2.0'
+}
 
-sourceCompatibility = 1.5
+jmh {
+    jmhVersion = '1.8'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+compileJava.options.encoding = 'UTF-8'
 version = '1.0'
 
 repositories {
@@ -9,4 +19,6 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'org.openjdk.jmh', name: 'jmh-core', version:'1.8'
+    compile group: 'org.openjdk.jmh', name: 'jmh-generator-annprocess', version:'1.8'
 }
