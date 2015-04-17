@@ -1,11 +1,9 @@
 package io.github.omskscream.ioc;
 
-import java.io.Serializable;
-
 /**
  * @author omskscream
  */
-final class IOCKey implements Serializable {
+final class IOCKey {
 
     private static final String DEFAULT_NAME = "default"; //not empty because of zero hashcode
 

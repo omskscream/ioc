@@ -1,13 +1,12 @@
 package io.github.omskscream.ioc;
 
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
  * @author omskscream
  */
-public abstract class Typed<T> implements Serializable {
+public abstract class Typed<T> {
     public static final Typed<String>   STRING  = new Typed<String>() {};
     public static final Typed<Character>CHAR    = new Typed<Character>() {};
     public static final Typed<Integer>  INTEGER = new Typed<Integer>() {};
