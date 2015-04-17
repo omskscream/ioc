@@ -13,6 +13,7 @@ public abstract class AbstractBindModule implements IBindModule, IOC {
 
     public AbstractBindModule(IOC container) {
         this.container = container;
+        announce();                             //module will announce dependencies in time of creation
     }
 
     public abstract void announce();

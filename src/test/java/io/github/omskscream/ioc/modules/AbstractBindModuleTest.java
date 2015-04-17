@@ -27,7 +27,6 @@ public class AbstractBindModuleTest {
     public void thatBindingInModuleAcceptedByContainer() {
         IOC ioc = new IOCImpl();
         IBindModule module = new DumbBindModule(ioc);
-        module.announce();
 
         assertEquals("valueString", ioc.resolve("keyString", String.class));
     }
