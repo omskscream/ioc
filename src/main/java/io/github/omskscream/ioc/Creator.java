@@ -35,6 +35,8 @@ final class Creator {
                             match = (int.class.equals(need) && Integer.class.equals(got))
                                     || (long.class.equals(need) && Long.class.equals(got))
                                     || (char.class.equals(need) && Character.class.equals(got))
+                                    || (float.class.equals(need) && Float.class.equals(got))
+                                    || (double.class.equals(need) && Double.class.equals(got))
                                     || (short.class.equals(need) && Short.class.equals(got))
                                     || (boolean.class.equals(need) && Boolean.class.equals(got))
                                     || (byte.class.equals(need) && Byte.class.equals(got));
